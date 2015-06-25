@@ -15,9 +15,22 @@ class UserRepositoryInMemory implements UserRepositoryInterface
 
     public function __construct(array $users = [])
     {
-        if ($users) {
-            $this->appendUsers($users);
+
+        if (!$users) {
+            $users = $this->initWithDefaultUsers();
         }
+
+        $this->appendUsers($users);
+    }
+
+    private function initWithDefaultUsers()
+    {
+        return [
+            new User(1, 'Rafael', 'rafael@example.com'),
+            new User(2, 'Donatello', 'donatello@example.com'),
+            new User(3, 'Michelangelo', 'michelangelo@example.com'),
+            new User(4, 'Leonardo', 'leonardo@example.com'),
+        ];
     }
 
     /**
@@ -35,11 +48,12 @@ class UserRepositoryInMemory implements UserRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function get(User $user)
+    public function get($id)
     {
-        if ($this->has($user)) {
-            return $user;
+        if (array_key_exists($id, $this->users)) {
+            return $this->users[$id];
         }
+
     }
 
     /**
@@ -48,6 +62,7 @@ class UserRepositoryInMemory implements UserRepositoryInterface
     public function save(User $user)
     {
         $this->users[] = $user;
+        return $user;
     }
 
     /**
@@ -55,9 +70,8 @@ class UserRepositoryInMemory implements UserRepositoryInterface
      */
     public function update(User $user)
     {
-        if ($this->has($user)) {
-            $this->users[$user->getId()] = $user;
-        }
+        $this->users[$user->getId()] = $user;
+        return $user;
     }
 
     /**

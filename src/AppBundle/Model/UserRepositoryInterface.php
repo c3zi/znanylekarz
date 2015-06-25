@@ -13,10 +13,10 @@ interface UserRepositoryInterface
     /**
      * Gets an user from repository.
      *
-     * @param User $user
+     * @param int $id
      * @return User|null
      */
-    public function get(User $user);
+    public function get($id);
 
     /**
      * Saves an user in repository.

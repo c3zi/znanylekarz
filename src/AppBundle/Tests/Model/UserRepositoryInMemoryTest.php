@@ -37,7 +37,7 @@ class UserRepositoryInMemoryTest extends \PHPUnit_Framework_TestCase
         $userRepository = new UserRepositoryInMemory($this->users);
 
         foreach ($this->users as $userObject) {
-            $this->assertEquals($userObject, $userRepository->get($userObject));
+            $this->assertEquals($userObject, $userRepository->get($userObject->getId()));
         }
     }
 
