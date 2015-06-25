@@ -23,6 +23,11 @@ class UserRepositoryInMemory implements UserRepositoryInterface
         $this->appendUsers($users);
     }
 
+    /**
+     * Sets default users. It is used only for testing purposes.
+     *
+     * @return array
+     */
     private function initWithDefaultUsers()
     {
         return [
