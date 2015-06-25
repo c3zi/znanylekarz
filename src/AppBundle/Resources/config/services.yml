@@ -1,0 +1,18 @@
+services:
+  app.user.repository:
+    class: AppBundle\Model\UserRepositoryInMemory
+  app.user.handler:
+    class: "AppBundle\Handler\UserHandler"
+    arguments:
+      userRepository: "@app.user.repository"
+      form_factory: "@form.factory"
+      event_dispatcher: "@event_dispatcher"
+      logger: "@logger"
+  app.stats_system.service:
+      class: AppBundle\Service\StatsSystem
+      tags:
+        - { name: kernel.event_listener, event: user.post_update, method: postRequest }
+  app.marketing_system.service:
+      class: AppBundle\Service\MarketingSystem
+      tags:
+        - { name: kernel.event_listener, event: user.post_update, method: postRequest }

@@ -1,0 +1,5 @@
+app_user:
+    type: rest
+    resource: AppBundle\Controller\UserController
+    defaults: {_format: json}
+    name_prefix: api_
