@@ -8,8 +8,17 @@
 
 namespace AppBundle\Validator;
 
+use Symfony\Component\Validator\Constraint;
 
-class Token
+/**
+ * @Annotation
+ */
+class Token extends Constraint
 {
+    public $message = 'The token "%string%" is not correct.';
 
+    public function validatedBy()
+    {
+        return 'app.validator.token';
+    }
 }
